@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+option go_package = "./pb";
+
+service UserServer {
+    rpc GetUserById (Id) returns (Users);
+    rpc GetAllUsers (Empty) returns (stream Users);
+    rpc InsertUser (Users) returns (Users);
+    rpc UpdateUser (UpdateRequest) returns (Users);
+    rpc DeleteUser (Id) returns (DeleteResponse);
+}
+
+message Empty {}
+
+message Users {
+    int64 id = 1;
+    string username = 2;
+    string passwd = 3;
+    string email = 4;
+}
+
+message Id {
+	int64 id = 1;
+}
+
+message UpdateRequest{
+    int64 id = 1;
+    Users user = 2;
+}
+
+message Status {
+	int32 value = 1; 
+}
+
+message DeleteResponse{
+    string message = 1;
+}
